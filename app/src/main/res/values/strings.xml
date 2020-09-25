@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BestMovieDB</string>
+    <string name="categories">Movies</string>
+    <string name="hunt_name">The Hunt for Red October</string>
+    <string name="hunt_details">A new, technologically-superior Soviet sub, the Red October, is heading for the U.S. coast under the command of Captain Marko Ramius. The American government thinks Ramius is planning to attack....</string>
+    <string name="ok">OK</string>
+    <string name="action_adventure_thriller">Year, Action, Adventure, Thriller</string>
+
+    <string name="movies">Movies</string>
+    <string name="show_details">Show Details</string>
+    <string name="todo">TODO</string>
+</resources>
