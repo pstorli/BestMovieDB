@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimaryDark"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,19 +15,21 @@
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/BestMovieDBToolbarTheme"
+        app:logo="@drawable/ic_launcher"
         app:popupTheme="@style/BestMovieDBToolbarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:title="@string/app_name"
-        app:titleMarginStart="22dp" />
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:titleMarginStart="28dp" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navigationController"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/mainToolbar"
+        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

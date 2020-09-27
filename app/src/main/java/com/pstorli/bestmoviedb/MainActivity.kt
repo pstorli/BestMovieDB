@@ -12,6 +12,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportActionBar?.setHomeButtonEnabled (true)
+
+        supportActionBar?.setIcon (R.drawable.ic_launcher)
     }
 
     override fun onSupportNavigateUp() =

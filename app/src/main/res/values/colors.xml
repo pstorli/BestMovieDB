@@ -6,7 +6,7 @@
 
     <!-- Button back is 20% transparent burple - bluishpurple-->
     <color name="black">#000000</color>
-    <color name="burple">#6300EF</color>
+    <color name="blue">#6300EF</color>
     <color name="button_back">#806300EF</color>
 
     <color name="pink">#FC00FE</color>
