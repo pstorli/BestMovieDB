@@ -1,35 +1,22 @@
 package com.pstorli.bestmoviedb.repo
 
 import com.pstorli.bestmoviedb.model.Movie
-import com.pstorli.bestmoviedb.repo.MovieDataService.movies
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class MovieRepository {
+class MovieRepository ()  : DataSourceImpl()
+{
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // The currently selected DataSource
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    var selectedDS : DataSource? = StaticDataSource
 
     /**
-     * Return the selected movie.
+     * Load some movies on the IO thread.
      */
-    fun getSelectedMovie(): Movie? {
-        return if (movies.size>0) {
-            // TODO Get from prefs
-            return movies[0]
-        } else {
-            // Get data from BestMovie RDS
-            null // TODO
+    override suspend fun loadMovies(): List<Movie> {
+        return withContext(Dispatchers.IO) {
+            selectedDS?.loadMovies() ?: StaticDataSource.loadMovies()
         }
-    }
-
-    fun selectMovie() {
-        // TODO save to prefs
-    }
-
-    /**
-     * Return a list of movies.
-     */
-    fun getMovies(): List<Movie>? {
-
-        // TODO: For now, return hard coded movies. Later get from BestMovieRDS
-
-        // Later Get data from BestMovie RDS
-        return movies
     }
 }

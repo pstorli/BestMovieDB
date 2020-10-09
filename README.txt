@@ -10,10 +10,16 @@ Email:          pstorli@gmail.com
 Phone:          971-888-2534
 Address:        18529 Chemawa Lane NE, Silverton, OR 97381
 
+Resolved Issues Version 1002:
+  0000 Added live data observer to viewmodel
+  0000 Updated drawable/architecture.png
+  0000 Added back button to toolbar
+  0000 Added coroutines between MovieViewModel and MovieRepository
+
 Resolved Issues Version 1001:
   0000 Added toolbar icon and larger toolbar text
 
-Resolved Issues Version01:
+Resolved Issues Version 1000:
   0000 Init Commit
   0000 Can move between list and detail fragfments with button clicks
        using new google navigation framework.
