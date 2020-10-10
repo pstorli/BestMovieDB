@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -11,8 +12,8 @@ android {
         applicationId "com.pstorli.bestmoviedb"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1002
-        versionName "1002"
+        versionCode 1003
+        versionName "1003"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,6 +24,19 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
+
+    // Add support to hide themoviedb api key in local.properties.
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        def tmdbApiKey = properties.getProperty("tmdb_api_key", "")
+
+        it.buildConfigField 'String', "TMDB_API_KEY",   tmdbApiKey
+
+        it.resValue         'string', "api_key",        tmdbApiKey
+    }
+
 }
 
 dependencies {
@@ -59,10 +73,27 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recyclerview"
 
     // Picasso - Helps with loading images from urls
-    implementation "com.squareup.picasso:picasso:$picasso"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
-    // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    // Moshi - For parsing the JSON data
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
+    // Retrofit2 - For making the requests
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit2_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+
+    // Okhttp3 - For creating an HTTP request with all the proper headers.
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    // Picasso - For downloading an image from the internet and setting it into an ImageView.
+    implementation ("com.squareup.picasso:picasso:$picassoVersion"){
+        exclude group: "com.android.support"
+    }
+
+    // Kotlin Coroutines - For making non-blocking (main thread) network requests.
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
 }

@@ -80,6 +80,8 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
             // Now that we have the data, notify the observers. Notify of update by
             // setting selected movie to the first movie.
             // /////////////////////////////////////////////////////////////////////////////////////
+
+            // TODO: Try to keep selected movie the same between reloads, if possible.
             movie.value = movies.get(0)
         }
     }
