@@ -22,7 +22,7 @@ Creation Reason:
   Some techniques used here were clean mvvm architecture, custom toolbar, recycler views,
   view models, new google screen navigation framework, nav_graph.xml, nav controller, fragments,
   kotlin coroutines and extension functions, live data, observers, view holders,
-  data sources, repositories, web services, rest and json
+  data sources, repositories, web services, rest and json, network interceptor,
   suppport library usage: Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Picasso / Glide
   testing using junit and expresso using idling resources
 
