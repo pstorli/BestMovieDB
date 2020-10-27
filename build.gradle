@@ -2,8 +2,8 @@
 buildscript {
     ext.kotlin_version                  = '1.4.10'
     ext.core_ktx                        = '1.3.2'
-    ext.nav_version                     = '2.3.0'
-    ext.gradle_version                  = '4.0.2'
+    ext.nav_version                     = '2.3.1'
+    ext.gradle_version                  = '4.1.0'
     ext.app_compat_version              = '1.2.0'
     ext.lifecycle_extensions            = '2.2.0'
     ext.constraint_layout               = '2.0.2'
@@ -11,12 +11,13 @@ buildscript {
     ext.junit_runner                    = '1.1.2'
     ext.android_test_implementation     = '3.3.0'
     ext.recyclerview                    = '1.1.0'
-
-    ext.moshiVersion                    = '1.8.0'
-    ext.retrofit2_version               = '2.5.0'
-    ext.okhttp3_version                 = '3.12.0'
-    ext.kotlinCoroutineVersion          = '1.3.9'
-    ext.picassoVersion                  = '2.71828'
+    ext.nav_version                     = '2.3.1'
+    ext.moshi_version                   = '1.8.0'
+    ext.retrofit2_version               = '2.7.0'
+    ext.okhttp_version                  = '4.3.1'
+    ext.coroutine_version               = '1.3.9'
+    ext.glide_version                   = '4.9.0'
+    ext.gson_version                    = '2.8.5'
 
     repositories {
         google()

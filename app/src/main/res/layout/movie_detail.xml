@@ -21,17 +21,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Subtitle -->
+    <!-- Release Date -->
     <TextView
-        android:id="@+id/subtitle"
+        android:id="@+id/release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_adventure_thriller"
         android:textColor="@color/white"
         android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Genre -->
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_adventure_thriller"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/release_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Image -->
     <ImageView
@@ -47,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/genre"
         app:srcCompat="@drawable/red_oct" />
 
     <!-- Description -->

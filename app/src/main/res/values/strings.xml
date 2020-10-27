@@ -8,6 +8,6 @@
 
     <string name="movies">Movies</string>
     <string name="show_details">Show Details</string>
-    <string name="subtitle_text">%1$s %2$s</string>
+    <string name="starting">BestMovieDB is starting</string>
     <string name="todo">TODO</string>
 </resources>

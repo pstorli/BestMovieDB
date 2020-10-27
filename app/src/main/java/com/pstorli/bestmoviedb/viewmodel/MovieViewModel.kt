@@ -2,12 +2,13 @@ package com.pstorli.ticketrider.model
 
 import android.app.Application
 
-import android.view.View
 import androidx.lifecycle.AndroidViewModel
-import com.pstorli.bestmoviedb.model.Movie
 import com.pstorli.bestmoviedb.repo.MovieRepository
 import androidx.lifecycle.MutableLiveData
 import com.pstorli.bestmoviedb.logError
+import com.pstorli.bestmoviedb.model.Genres
+import com.pstorli.bestmoviedb.model.Movie
+import com.pstorli.bestmoviedb.model.Movies
 import com.pstorli.bestmoviedb.util.Consts
 import kotlinx.coroutines.*
 import java.util.*
@@ -17,14 +18,55 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
     // /////////////////////////////////////////////////////////////////////////////////////////////
     // Movie Stuff
     // /////////////////////////////////////////////////////////////////////////////////////////////
+
     // Our repo where we get our data from.
     val movieRepo = MovieRepository ()
 
     // When the movies change, let the listeners know.
-    var movies: List<Movie> = ArrayList ()
+    lateinit var movies: Movies
 
     // The selected movie, as live data.
     var movie = MutableLiveData<Movie> ()
+
+    // The movie genres
+    private lateinit var genres: Genres
+
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Helpful Movie Stuff
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Match the genre id to its name
+     */
+    fun getGenre (id:Int):String {
+        var genreName = ""
+        // Search thru list
+        for (genre in genres.results) {
+            if (id == genre.id) {
+                genreName = genre.name
+            }
+        }
+        return genreName
+    }
+
+    /**
+     * Return a comma separated string of genres
+     */
+    fun getGenres (movie: Movie):String
+    {
+        val genres = StringBuffer ()
+        for (id in movie.genre_ids) {
+            val genreId = getGenre (id)
+            if (!genreId.isEmpty()) {
+                // If not first, put in a comma.
+                if (!genres.isEmpty()) {
+                    genres.append(" , ")
+                }
+                genres.append(getGenre(id))
+            }
+        }
+        return genres.toString()
+    }
 
     // /////////////////////////////////////////////////////////////////////////////////////////////
     // Coroutine stuff
@@ -71,6 +113,16 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
         // Launch on main thread.
         coroutineScope.launch (Dispatchers.Main) {
             // /////////////////////////////////////////////////////////////////////////////////////
+            // Load the movie genres.
+            //
+            // NOTE: This blocks and returns only when done.
+            // Refresh from repo on IO thread.
+            // /////////////////////////////////////////////////////////////////////////////////////
+            this@MovieViewModel.genres = movieRepo.loadGenres()
+
+            // /////////////////////////////////////////////////////////////////////////////////////
+            // Load the movies.
+            //
             // NOTE: This blocks and returns only when done.
             // Refresh from repo on IO thread.
             // /////////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +134,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
             // /////////////////////////////////////////////////////////////////////////////////////
 
             // TODO: Try to keep selected movie the same between reloads, if possible.
-            movie.value = movies.get(0)
+            movie.value = this@MovieViewModel.movies.results[0]
         }
     }
 }

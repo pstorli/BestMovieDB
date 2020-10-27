@@ -37,14 +37,23 @@ class MovieDetailFragment : Fragment () {
         if (null != movieViewModel.movie.value) {
 
             // Got movie?
-            val selectedMovie:Movie?                = movieViewModel.movie.value
+            val selectedMovie: Movie?                = movieViewModel.movie.value
             if (null != selectedMovie) {
                 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Set the title, subtitle and description.
                 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Title
                 movieDetailView.title.text          = selectedMovie.title
-                movieDetailView.subtitle.text       = getString (R.string.subtitle_text, selectedMovie.year.toString(), selectedMovie.genre)
-                movieDetailView.description.text    = selectedMovie.description
+
+                // Release date
+                movieDetailView.release_date.text   = selectedMovie.release_date
+
+                // Genre
+                movieDetailView.genre.text          = movieViewModel.getGenres (selectedMovie)
+
+                // Dec
+                movieDetailView.description.text    = selectedMovie.overview
 
                 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Load the image.

@@ -1,5 +1,6 @@
 # BestMovieDB
 
+
 Name:            BestMovieDB
 Date:            27 Sep 2020
 
@@ -23,14 +24,24 @@ Creation Reason:
   view models, new google screen navigation framework, nav_graph.xml, nav controller, fragments,
   kotlin coroutines and extension functions, live data, observers, view holders,
   data sources, repositories, web services, rest and json, network interceptor,
-  suppport library usage: Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Picasso / Glide
+  suppport library usage: Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Glide
   testing using junit and expresso using idling resources
 
 Resolved Issues Version 1003:
+  0000 Have movie list and movie details coming from themoviedb using retrofit and co-routines
   0000 Added the following suppport libraries:
-    Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Picasso / Glide
+    Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Glide (faster than Picasso)
 
-  0000
+  0000 Added Android Studio plugin JsonToKotlinClass to create moshi data classes
+       ALT-K or right click package -> New -> Kotlin data class from JSON
+
+  0000 To Test Movie URL, get and call remote website with correct url and params in browser.
+     For sample data see file: JSON_PopularMovies.json
+     URL: https://api.themoviedb.org/3/movie/popular?api_key=BuildConfig.TMDB_API_KEY&language=en-US&page=1
+
+  0000 To Test Genre URL, get and call remote website with correct url and params in browser.
+       For sample data see file: JSON_MovieGenres.json
+       URL: https://api.themoviedb.org/3/genre/tv/list?api_key=BuildConfig.TMDB_API_KEY&language=en-US
 
 Resolved Issues Version 1002:
   0000 Added live data observer to viewmodel
@@ -50,18 +61,18 @@ Known Issues:
   0000 Try to keep selected movie the same between reloads, if possible.
 
 Desired Features
-  0000 Add sql lite repository, DBDataSource
+  0000 Add sql lite repository, DBDataSource - to keep track of user tastes without exposing PPI
+  0000 Add search ability.
 
 Helpful URLS:
   https://www.themoviedb.org/?language=en-US
+  https://www.baeldung.com/retrofit
+  https://www.journaldev.com/13639/retrofit-android-example-tutorial
   https://developer.android.com/jetpack/androidx/releases/navigation
   https://blog.mindorks.com/exploring-android-view-pager2-in-android
   https://android.jlelse.eu/android-networking-in-2019-retrofit-with-kotlins-coroutines-aefe82c4d777
   https://github.com/navi25/RetrofitKotlinDeferred/
+  https://www.vogella.com/tutorials/Retrofit/article.html
 
-Tips, tricks and backflips!
-
-  // Sample themoviedb request
-  https://api.themoviedb.org/3/movie/550?api_key=${local.properties.TMDB_API_KEY}
 
 

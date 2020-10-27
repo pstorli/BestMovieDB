@@ -14,12 +14,12 @@ class MovieAdapter(private val movieViewModel: MovieViewModel, private val movie
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie: Movie = movieViewModel.movies[position]
+        val movie: Movie = movieViewModel.movies.results[position]
 
         // Set the view model.
         holder.bind (movie)
     }
 
-    override fun getItemCount(): Int = movieViewModel.movies.size
+    override fun getItemCount(): Int = movieViewModel.movies.results.size
 
 }

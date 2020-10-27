@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.movie_list_item.view.*
 class MovieViewHolder (inflater: LayoutInflater, val parent: ViewGroup, val movieListFragment: MovieListFragment) :
     RecyclerView.ViewHolder (inflater.inflate(R.layout.movie_list_item, parent, false)) {
 
-    var movie:Movie? = null
+    var movie: Movie? = null
 
     fun bind (movie: Movie) {
         // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ class MovieViewHolder (inflater: LayoutInflater, val parent: ViewGroup, val movi
         itemView.title.text =  movie.title
 
         // Load the image
-        itemView.image.loadImage(
+        itemView.image.loadImage (
             movie,
             movieListFragment.activity
         )
