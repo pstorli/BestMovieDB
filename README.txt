@@ -13,19 +13,23 @@ Description:
   Create an app that shows the user a list of popular movies.
   When a movie is clicked, the user should be taken to a details page.
 
-Creation Reason:
-  To create an app that illustrates a common set of operations,
-  showing a list and then showing details of selected item.
-  The list is fetched from a web service, so background work was needed.
-  The latest techniques and technologies were used to show of
-  what an app can be if only the best tools, libraries and methodologies are used.
+  Shows how to design kotlin android app that shows popular movies from tmdb.
+  (https://www.themoviedb.org)
 
-  Some techniques used here were clean mvvm architecture, custom toolbar, recycler views,
-  view models, new google screen navigation framework, nav_graph.xml, nav controller, fragments,
-  kotlin coroutines and extension functions, live data, observers, view holders,
-  data sources, repositories, web services, rest and json, network interceptor,
-  suppport library usage: Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Glide
-  testing using junit and expresso using idling resources
+  The latest techniques and technologies were used to show off what an app can be if only
+  the best tools, libraries and methodologies are used.
+
+  Keywords: TMDB Kotlin Coroutines MVVM Glide Room RecyclerView Models NavController
+  Fragments Retrofit Rest JSON OKhttp Expresso Junit
+
+Resolved Issues Version 1004:
+  0000 !Added refresh icon to toolbar to cause room/sqllite db to refresh from json tmdb call
+  0000 !Cached movie result in a local database using Room so that the user
+       does not lose their results if the remote tmdb popular movies changes.
+       They have to press the new refresh button on the toolbar.
+  0000 Added json to/from string room transform classes to handle list of List<Genre>
+  0000 Added room relationship and bridge classes (Movie, Movies and Genres and Genre)
+       to handle list of movies also (Genres and Genre classes to handle int genres)
 
 Resolved Issues Version 1003:
   0000 Have movie list and movie details coming from themoviedb using retrofit and co-routines
@@ -67,6 +71,13 @@ Desired Features
 Helpful URLS:
   https://www.themoviedb.org/?language=en-US
   https://www.baeldung.com/retrofit
+  https://gabrieltanner.org/blog/android-room
+  https://developer.android.com/codelabs/android-room-with-a-view-kotlin
+  https://android.jlelse.eu/android-architecture-components-room-introduction-4774dd72a1ae
+  https://android.jlelse.eu/android-architecture-components-room-relationships-bf473510c14a
+  https://mobikul.com/android-room-persistence-library/
+  https://itnext.io/how-to-create-m-n-relationship-with-room-and-kotlin-ddbdebf0ee38
+  https://dev.to/normanaspx/android-room-how-works-one-to-many-relationship-example-5ad0
   https://www.journaldev.com/13639/retrofit-android-example-tutorial
   https://developer.android.com/jetpack/androidx/releases/navigation
   https://blog.mindorks.com/exploring-android-view-pager2-in-android

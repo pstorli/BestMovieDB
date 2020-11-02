@@ -2,11 +2,9 @@ package com.pstorli.bestmoviedb.network
 
 import com.pstorli.bestmoviedb.BuildConfig
 import com.pstorli.bestmoviedb.logError
-import com.pstorli.bestmoviedb.model.Movie
 import com.pstorli.bestmoviedb.model.Movies
 import com.pstorli.bestmoviedb.ds.MovieDataSourceImpl
 import com.pstorli.bestmoviedb.ds.StaticDataSource
-import com.pstorli.bestmoviedb.model.Genre
 import com.pstorli.bestmoviedb.model.Genres
 import com.pstorli.bestmoviedb.util.Consts.TMDB_BASE_URL
 import com.pstorli.bestmoviedb.util.Consts.TMDB_API_URL
@@ -76,6 +74,7 @@ class RemoteDataSource : MovieDataSourceImpl()
 
             // /////////////////////////////////////////////////////////////////////////////////////
             // !!! Block here and wait as the .execute call is being done synchrously.           !!!
+            // NOTE: Have not found way yet to get rid of warning: Inappropriate blocking method call
             // /////////////////////////////////////////////////////////////////////////////////////
             val response: Response<Movies> = callSync.execute()
 
@@ -107,6 +106,7 @@ class RemoteDataSource : MovieDataSourceImpl()
 
             // /////////////////////////////////////////////////////////////////////////////////////
             // !!! Block here and wait as the .execute call is being done synchrously.           !!!
+            // NOTE: Have not found way yet to get rid of warning: Inappropriate blocking method call
             // /////////////////////////////////////////////////////////////////////////////////////
             val response: Response<Genres> = callSync.execute()
 

@@ -12,10 +12,14 @@ android {
         applicationId "com.pstorli.bestmoviedb"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1003
-        versionName "1003"
+        versionCode 1004
+        versionName "1004"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 
     buildTypes {
@@ -42,6 +46,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "androidx.core:core-ktx:$core_ktx"
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
@@ -55,7 +60,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
-    // Kotlin
+    // Nav Graph Navogation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -95,4 +100,14 @@ dependencies {
 
     // Gson for Json
     implementation "com.google.code.gson:gson:$gson_version"
+
+    // Room sql lite db management
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // Room optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // Room optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }

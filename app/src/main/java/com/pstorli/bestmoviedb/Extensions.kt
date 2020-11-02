@@ -74,3 +74,12 @@ fun ImageView.loadImage (movie: Movie, activity: Activity?)
         ex.toString().logError()
     }
 }
+
+/**
+ * Trim leading and trailing white space,
+ * and brackets.
+ */
+fun String.trimBraces():String
+{
+    return trim().replace("[", "").replace("]", "")
+}

@@ -3,13 +3,12 @@ package com.pstorli.ticketrider.model
 import android.app.Application
 
 import androidx.lifecycle.AndroidViewModel
-import com.pstorli.bestmoviedb.repo.MovieRepository
+import com.pstorli.bestmoviedb.ds.MovieRepository
 import androidx.lifecycle.MutableLiveData
 import com.pstorli.bestmoviedb.logError
 import com.pstorli.bestmoviedb.model.Genres
 import com.pstorli.bestmoviedb.model.Movie
 import com.pstorli.bestmoviedb.model.Movies
-import com.pstorli.bestmoviedb.util.Consts
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -134,7 +133,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
             // /////////////////////////////////////////////////////////////////////////////////////
 
             // TODO: Try to keep selected movie the same between reloads, if possible.
-            movie.value = this@MovieViewModel.movies.results[0]
+            movie.value = this@MovieViewModel.movies.results?.get(0)
         }
     }
 }

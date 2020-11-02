@@ -10,11 +10,11 @@ object Consts {
     const val TMDB_API_URL      = TMDB_BASE_URL + "movie/popular?api_key="+BuildConfig.TMDB_API_KEY+"&language=en-US&page=1"
 
     val SOME_GENRES = listOf<Genre> (
-        Genre (35,"Comedy"),
-        Genre (18,"Drama"),
-        Genre (37,"Western"),
-        Genre (10765,"Sci-Fi & Fantasy"),
-        Genre (10759,"Action & Adventure"),
-        Genre (99,"Documentary")
+        Genre (35,    "Comedy"),
+        Genre (18,    "Drama"),
+        Genre (37,    "Western"),
+        Genre (10765, "Sci-Fi & Fantasy"),
+        Genre (10759, "Action & Adventure"),
+        Genre (99,    "Documentary")
     )
 }
