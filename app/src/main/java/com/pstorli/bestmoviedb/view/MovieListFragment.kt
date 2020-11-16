@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pstorli.bestmoviedb.R
-import com.pstorli.ticketrider.model.MovieViewModel
 import kotlinx.android.synthetic.main.movie_list.*
 
 class MovieListFragment : Fragment () {

@@ -9,8 +9,7 @@ import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.pstorli.bestmoviedb.model.Movie
-import com.pstorli.bestmoviedb.util.Consts
-import com.pstorli.bestmoviedb.util.Consts.TMDB_PHOTO_URL
+import com.pstorli.bestmoviedb.Consts.TMDB_PHOTO_URL
 
 /**
  * Log an error message.
@@ -21,11 +20,27 @@ fun String.logError()
 }
 
 /**
+ * Log an error message.
+ */
+fun String.logWarning()
+{
+    Log.w (Consts.TAG, this)
+}
+
+/**
  * Log an info message.
  */
 fun String.logInfo()
 {
   Log.i (Consts.TAG, this)
+}
+
+/**
+ * Log a debug message.
+ */
+fun String.debug()
+{
+    Log.w (Consts.TAG, this)
 }
 
 /**
@@ -64,7 +79,7 @@ fun ImageView.loadImage (movie: Movie, activity: Activity?)
           Glide.with(this)
                 .load(photoURL)
                 .centerCrop()
-                .placeholder(R.drawable.a2001)
+                .placeholder(R.drawable.loading)
                 .error(R.drawable.ic_error)
                 .fallback(R.drawable.ic_launcher)
                 .into(this)

@@ -1,25 +1,34 @@
-package com.pstorli.ticketrider.model
+package com.pstorli.bestmoviedb.view
 
 import android.app.Application
+import android.content.SharedPreferences
 
 import androidx.lifecycle.AndroidViewModel
-import com.pstorli.bestmoviedb.ds.MovieRepository
 import androidx.lifecycle.MutableLiveData
 import com.pstorli.bestmoviedb.logError
 import com.pstorli.bestmoviedb.model.Genres
 import com.pstorli.bestmoviedb.model.Movie
 import com.pstorli.bestmoviedb.model.Movies
+import com.pstorli.bestmoviedb.repo.MovieRepository
+import com.pstorli.bestmoviedb.Consts.PAGE
+import com.pstorli.bestmoviedb.Consts.PAGE_DEF
+import com.pstorli.bestmoviedb.Consts.PREF_NAME
+import com.pstorli.bestmoviedb.Consts.PRIVATE_MODE
 import kotlinx.coroutines.*
 import java.util.*
 
 class MovieViewModel (application: Application)  : Observer, AndroidViewModel(application)
 {
     // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Vars
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    var sharedPrefs: SharedPreferences
+    var app:         Application
+
+    // /////////////////////////////////////////////////////////////////////////////////////////////
     // Movie Stuff
     // /////////////////////////////////////////////////////////////////////////////////////////////
-
-    // Our repo where we get our data from.
-    val movieRepo = MovieRepository ()
+    var page = 0 // What page are we on?
 
     // When the movies change, let the listeners know.
     lateinit var movies: Movies
@@ -29,6 +38,13 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
 
     // The movie genres
     private lateinit var genres: Genres
+
+    init {
+        app         = application
+        sharedPrefs = app.getSharedPreferences (PREF_NAME, PRIVATE_MODE)
+
+        page        = sharedPrefs.getInt(PAGE, PAGE_DEF)
+    }
 
     // /////////////////////////////////////////////////////////////////////////////////////////////
     // Helpful Movie Stuff
@@ -40,9 +56,12 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
     fun getGenre (id:Int):String {
         var genreName = ""
         // Search thru list
-        for (genre in genres.results) {
-            if (id == genre.id) {
-                genreName = genre.name
+        val list = genres.results?.listIterator()
+        if (null != list) {
+            for (genre in list) {
+                if (id == genre.id) {
+                    genreName = genre.name
+                }
             }
         }
         return genreName
@@ -108,16 +127,16 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
      * This routine launches which, when done,
      */
     fun loadMovies () {
-
         // Launch on main thread.
         coroutineScope.launch (Dispatchers.Main) {
+
             // /////////////////////////////////////////////////////////////////////////////////////
             // Load the movie genres.
             //
             // NOTE: This blocks and returns only when done.
             // Refresh from repo on IO thread.
             // /////////////////////////////////////////////////////////////////////////////////////
-            this@MovieViewModel.genres = movieRepo.loadGenres()
+            this@MovieViewModel.genres = MovieRepository.loadGenres(this@MovieViewModel.getApplication())
 
             // /////////////////////////////////////////////////////////////////////////////////////
             // Load the movies.
@@ -125,7 +144,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
             // NOTE: This blocks and returns only when done.
             // Refresh from repo on IO thread.
             // /////////////////////////////////////////////////////////////////////////////////////
-            this@MovieViewModel.movies = movieRepo.loadMovies()
+            this@MovieViewModel.movies = MovieRepository.loadMovies(app.applicationContext, page)
 
             // /////////////////////////////////////////////////////////////////////////////////////
             // Now that we have the data, notify the observers. Notify of update by
@@ -134,6 +153,21 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
 
             // TODO: Try to keep selected movie the same between reloads, if possible.
             movie.value = this@MovieViewModel.movies.results?.get(0)
+        }
+    }
+
+    /**
+     * Delete all cached movies.
+     */
+    fun deleteAll () {
+
+        // Launch on main thread.
+        coroutineScope.launch (Dispatchers.Main) {
+            // Delete all cached movies.
+            MovieRepository.deleteAll(app.applicationContext)
+
+            // Load new movies.
+            loadMovies ()
         }
     }
 }

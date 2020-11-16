@@ -22,8 +22,41 @@ Description:
   Keywords: TMDB Kotlin Coroutines MVVM Glide Room RecyclerView Models NavController
   Fragments Retrofit Rest JSON OKhttp Expresso Junit
 
+  A nice feature of the refresh button, is that the app only queries the network
+  for data if it is not already cached in the database. When the refresh button is pressed,
+  the contents of the database are cleared and new data from the network is fetched
+  an cached into the database.
+
+  Also, concerning the model classes, you can try to use the same model classes for the
+  network, view and database access, but each has some quirks so it is better to have
+  a generic model class that the db and network models can be converted to/from.
+  The choice is between the complete flexibility of data/model classes for each
+  type of data source and the pain of converting between all the different mocdels and
+  the other choice is to have one model and adjust it so that everyone ius happy,
+  not always the easiest or a possible thing to do. This app started out with the idea
+  of one model, and experimented with models for each data source.
+
+  The reality is that there are not only black and white,
+  but an infinite number of shades of grey between the two.
+
+  Lastly, concerning room and retrofit. Room seems to dislike lists of children and
+  if retrofit gets a 200 (success) error code but no data, issue is probably
+  that conversion process has failed and retrofit will not give you any info.
+
+  Try re-generating network model classes directly from json and use those.
+  Android Studio plugin JsonToKotlinClass to create data classes ALT-K or right click
+  package -> New -> Kotlin data class from JSON
+
+Very Impotent Stuff:
+  If you just git, from github, add local.properties
+    tmdb_api_key ="{your moviedb api key here}"
+    sdk.dir      ="{your android sdk dir here}"
+
 Resolved Issues Version 1004:
-  0000 !Added refresh icon to toolbar to cause room/sqllite db to refresh from json tmdb call
+  0000 Changed genre/tv/list to genre/movie/list in Services.kt
+  0000 Added shared prefs to keep track of page we are on.
+  0000 Added old timey film countdown pic for loading.
+  0000 Added refresh icon to toolbar to cause room/sqllite db to refresh from json tmdb call
   0000 !Cached movie result in a local database using Room so that the user
        does not lose their results if the remote tmdb popular movies changes.
        They have to press the new refresh button on the toolbar.
@@ -36,16 +69,16 @@ Resolved Issues Version 1003:
   0000 Added the following suppport libraries:
     Okhttp, Retrofit, Moshi / GSON, Kotlin Coroutines, Glide (faster than Picasso)
 
-  0000 Added Android Studio plugin JsonToKotlinClass to create moshi data classes
+  0000 Added Android Studio plugin JsonToKotlinClass to create data classes
        ALT-K or right click package -> New -> Kotlin data class from JSON
 
   0000 To Test Movie URL, get and call remote website with correct url and params in browser.
      For sample data see file: JSON_PopularMovies.json
-     URL: https://api.themoviedb.org/3/movie/popular?api_key=BuildConfig.TMDB_API_KEY&language=en-US&page=1
+     URL: https://api.themoviedb.org/3/movie/popular
 
   0000 To Test Genre URL, get and call remote website with correct url and params in browser.
        For sample data see file: JSON_MovieGenres.json
-       URL: https://api.themoviedb.org/3/genre/tv/list?api_key=BuildConfig.TMDB_API_KEY&language=en-US
+       URL: https://api.themoviedb.org/3/genre/tv/list
 
 Resolved Issues Version 1002:
   0000 Added live data observer to viewmodel
@@ -63,15 +96,31 @@ Resolved Issues Version 1000:
 
 Known Issues:
   0000 Try to keep selected movie the same between reloads, if possible.
+  0000 Need to update drawable\architecture.png
 
-Desired Features
+Tips:
+  Consistency is your best friend, watch for repeating patterns in the flow.
+  Evaluate first, accept next, then more forward, if needed.
+  Don't give up, patience really is a virtue.
+
+Desired Features:
+  These are nice and possible, but the main idea of this app is to illustrate
+  Coroutines, database access, network access and how to layer everything correctly
+  to reduce dependancies. Added more functionality may make these ideas harder to see, see?
   0000 Add sql lite repository, DBDataSource - to keep track of user tastes without exposing PPI
   0000 Add search ability.
+  0000 Add next/prev page buttons
+  0000 Add snack bar to show messages.
+  0000 Make back button and refresh button change color (black -> white) when pressed or hover
+  0000 Add Custom Dialog to show about, also add about to overflow menu.
+  0000 Would be nice when we refresh not to wipe Genres, but then again they may have also changed
+       so perhaps I should remove this whole comment? Anyhow, that is whatr is currently happening.
 
 Helpful URLS:
   https://www.themoviedb.org/?language=en-US
   https://www.baeldung.com/retrofit
   https://gabrieltanner.org/blog/android-room
+  https://101android.com/room-persistence-library-implementation/
   https://developer.android.com/codelabs/android-room-with-a-view-kotlin
   https://android.jlelse.eu/android-architecture-components-room-introduction-4774dd72a1ae
   https://android.jlelse.eu/android-architecture-components-room-relationships-bf473510c14a

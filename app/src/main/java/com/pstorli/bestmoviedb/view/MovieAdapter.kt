@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pstorli.bestmoviedb.model.Movie
-import com.pstorli.ticketrider.model.MovieViewModel
 
 class MovieAdapter(private val movieViewModel: MovieViewModel, private val movieListFragment: MovieListFragment) : RecyclerView.Adapter<MovieViewHolder>() {
 

@@ -26,7 +26,7 @@
         app:contentInsetStartWithNavigation="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp"
-        app:title="@string/app_name"
+        app:title="@string/app_name_short"
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:titleMarginStart="28dp" />
 

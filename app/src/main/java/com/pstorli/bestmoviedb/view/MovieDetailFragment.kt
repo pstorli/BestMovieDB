@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import com.pstorli.bestmoviedb.R
 import com.pstorli.bestmoviedb.loadImage
 import com.pstorli.bestmoviedb.model.Movie
-import com.pstorli.ticketrider.model.MovieViewModel
 import kotlinx.android.synthetic.main.movie_detail.view.*
 import kotlinx.android.synthetic.main.movie_detail.view.image
 import kotlinx.android.synthetic.main.movie_detail.view.title

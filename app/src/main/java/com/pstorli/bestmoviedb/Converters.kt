@@ -1,4 +1,4 @@
-package com.pstorli.bestmoviedb.util
+package com.pstorli.bestmoviedb
 
 import androidx.room.TypeConverter
 
@@ -20,7 +20,15 @@ class Converters
      */
     @TypeConverter
     fun toGenres(value: String): List<Int> {
+        // Strip off blanks.
+        val valueNoBlanks = value.replace(" ","")
+
+        // Strip off single quotes.
+        val valueNoSingleQuotes = valueNoBlanks.replace("'","")
+
         // String to List<Int>
-        return value.split(",", " ").map(String::toInt)
+        val result: List<Int> = valueNoSingleQuotes.split(",").map(String::toInt)
+
+        return result
     }
 }
