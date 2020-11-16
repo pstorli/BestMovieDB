@@ -16,7 +16,7 @@
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/BestMovieDBToolbarTheme"
-        app:logo="@drawable/ic_launcher"
+        app:logo="@mipmap/ic_launcher"
         app:popupTheme="@style/BestMovieDBToolbarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
