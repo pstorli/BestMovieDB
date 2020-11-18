@@ -52,6 +52,10 @@ Very Impotent Stuff:
     tmdb_api_key ="{your moviedb api key here}"
     sdk.dir      ="{your android sdk dir here}"
 
+Resolved Issues Version 1005:
+  0000 Added next/prev page buttons on toolbar.
+  0000 Added snackbar to show messages.
+
 Resolved Issues Version 1004:
   0000 Changed genre/tv/list to genre/movie/list in Services.kt
   0000 Added shared prefs to keep track of page we are on.
@@ -95,8 +99,11 @@ Resolved Issues Version 1000:
        using new google navigation framework.
 
 Known Issues:
+  0000 When pressing the toolbar icons, reverse color to know that it was pressed.
   0000 Try to keep selected movie the same between reloads, if possible.
   0000 Need to update drawable\architecture.png
+  0000 Scrolling seems VERY sensitive
+  0000 Titlebar text was too big, to remove it had to set app name to empty string???
 
 Tips:
   Consistency is your best friend, watch for repeating patterns in the flow.

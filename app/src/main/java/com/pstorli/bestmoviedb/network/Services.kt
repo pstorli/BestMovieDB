@@ -1,11 +1,9 @@
 package com.pstorli.bestmoviedb.network
 
-import com.pstorli.bestmoviedb.BuildConfig.TMDB_API_KEY
 import com.pstorli.bestmoviedb.Consts.PAGE
-import com.pstorli.bestmoviedb.Consts.PAGE_DEF
+import com.pstorli.bestmoviedb.Consts.PAGE_FIRST
 import com.pstorli.bestmoviedb.Consts.TMDB_NAME_API_KEY
 import com.pstorli.bestmoviedb.model.Movies
-import com.pstorli.bestmoviedb.model.Genres
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -20,7 +18,7 @@ interface MovieService {
      *      https://api.themoviedb.org/3/movie/popular
      */
     @GET("movie/popular") // Page defaults to PAGE_DEF, page range is 1-1000
-    fun getPopularMovies(@Query(TMDB_NAME_API_KEY) api_key: String, @Query(PAGE) page: Int=PAGE_DEF): Call<Movies>
+    fun getPopularMovies(@Query(TMDB_NAME_API_KEY) api_key: String, @Query(PAGE) page: Int=PAGE_FIRST): Call<Movies>
 
     /**
      * Get movie genres - See document JSON_MovieGenres.json for sample data

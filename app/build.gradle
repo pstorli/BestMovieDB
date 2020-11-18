@@ -12,8 +12,8 @@ android {
         applicationId "com.pstorli.bestmoviedb"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1004
-        versionName "1004"
+        versionCode 1005
+        versionName "1005"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -63,7 +63,8 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$junit_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$android_test_implementation"
 
-    // Add Navigation Support
+    // Add Snackbar Support
+    implementation "com.google.android.material:material:$material_version"
 
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment:$nav_version"

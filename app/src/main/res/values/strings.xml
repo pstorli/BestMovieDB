@@ -1,15 +1,19 @@
 <resources>
+    <string name="action_adventure_thriller">1990 Action, Adventure, Thriller</string>
     <string name="app_name">BestMovieDB</string>
-    <string name="app_name_short">BMDB</string>
+    <string name="atStart">You are already at the start of the list.</string>
+    <string name="atEnd">You are already at the end of the list.</string>
+    <string name="blank"/>
     <string name="categories">Movies</string>
     <string name="hunt_name">The Hunt for Red October</string>
     <string name="hunt_details">A new, technologically-superior Soviet sub, the Red October, is heading for the U.S. coast under the command of Captain Marko Ramius. The American government thinks Ramius is planning to attack....</string>
-    <string name="ok">OK</string>
-    <string name="action_adventure_thriller">1990 Action, Adventure, Thriller</string>
-
+    <string name="minus">minus</string>
     <string name="movies">Movies</string>
+    <string name="ok">OK</string>
+    <string name="plus">plus</string>
+    <string name="refresh">Refresh</string>
     <string name="show_details">Show Details</string>
     <string name="starting">BestMovieDB is starting</string>
     <string name="todo">TODO</string>
-    <string name="refresh">Refresh</string>
+
 </resources>

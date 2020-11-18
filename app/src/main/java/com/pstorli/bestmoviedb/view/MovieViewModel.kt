@@ -2,22 +2,23 @@ package com.pstorli.bestmoviedb.view
 
 import android.app.Application
 import android.content.SharedPreferences
-
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.pstorli.bestmoviedb.Consts.PAGE
+import com.pstorli.bestmoviedb.Consts.PAGE_FIRST
+import com.pstorli.bestmoviedb.Consts.PREF_NAME
+import com.pstorli.bestmoviedb.Consts.PRIVATE_MODE
+import com.pstorli.bestmoviedb.R
 import com.pstorli.bestmoviedb.logError
 import com.pstorli.bestmoviedb.model.Genres
 import com.pstorli.bestmoviedb.model.Movie
 import com.pstorli.bestmoviedb.model.Movies
 import com.pstorli.bestmoviedb.repo.MovieRepository
-import com.pstorli.bestmoviedb.Consts.PAGE
-import com.pstorli.bestmoviedb.Consts.PAGE_DEF
-import com.pstorli.bestmoviedb.Consts.PREF_NAME
-import com.pstorli.bestmoviedb.Consts.PRIVATE_MODE
 import kotlinx.coroutines.*
 import java.util.*
 
-class MovieViewModel (application: Application)  : Observer, AndroidViewModel(application)
+
+class MovieViewModel(application: Application)  : Observer, AndroidViewModel(application)
 {
     // /////////////////////////////////////////////////////////////////////////////////////////////
     // Vars
@@ -28,7 +29,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
     // /////////////////////////////////////////////////////////////////////////////////////////////
     // Movie Stuff
     // /////////////////////////////////////////////////////////////////////////////////////////////
-    var page = 0 // What page are we on?
+    var page = PAGE_FIRST // What page are we on?
 
     // When the movies change, let the listeners know.
     lateinit var movies: Movies
@@ -41,9 +42,9 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
 
     init {
         app         = application
-        sharedPrefs = app.getSharedPreferences (PREF_NAME, PRIVATE_MODE)
+        sharedPrefs = app.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
 
-        page        = sharedPrefs.getInt(PAGE, PAGE_DEF)
+        page        = sharedPrefs.getInt(PAGE, PAGE_FIRST)
     }
 
     // /////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
     /**
      * Match the genre id to its name
      */
-    fun getGenre (id:Int):String {
+    fun getGenre(id: Int):String {
         var genreName = ""
         // Search thru list
         val list = genres.results?.listIterator()
@@ -70,11 +71,11 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
     /**
      * Return a comma separated string of genres
      */
-    fun getGenres (movie: Movie):String
+    fun getGenres(movie: Movie):String
     {
         val genres = StringBuffer ()
         for (id in movie.genre_ids) {
-            val genreId = getGenre (id)
+            val genreId = getGenre(id)
             if (!genreId.isEmpty()) {
                 // If not first, put in a comma.
                 if (!genres.isEmpty()) {
@@ -103,7 +104,8 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
 
     // Got scope?
     private val coroutineScope = CoroutineScope(
-        Dispatchers.Main + parentJob + coroutineExceptionHandler)
+        Dispatchers.Main + parentJob + coroutineExceptionHandler
+    )
 
     // /////////////////////////////////////////////////////////////////////////////////////////////
     // Now, Wake up refreshed.
@@ -115,7 +117,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
     /**
      * refreshModelFromRepos
      */
-    override fun update (p0: Observable?, p1: Any?) {
+    override fun update(p0: Observable?, p1: Any?) {
         loadMovies()
     }
 
@@ -128,7 +130,7 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
      */
     fun loadMovies () {
         // Launch on main thread.
-        coroutineScope.launch (Dispatchers.Main) {
+        coroutineScope.launch(Dispatchers.Main) {
 
             // /////////////////////////////////////////////////////////////////////////////////////
             // Load the movie genres.
@@ -161,14 +163,91 @@ class MovieViewModel (application: Application)  : Observer, AndroidViewModel(ap
      */
     fun deleteAll () {
 
+        // Update the page to the first page.
+        page = PAGE_FIRST
+        savePage()
+
         // Launch on main thread.
-        coroutineScope.launch (Dispatchers.Main) {
+        coroutineScope.launch(Dispatchers.Main) {
             // Delete all cached movies.
             MovieRepository.deleteAll(app.applicationContext)
 
             // Load new movies.
             loadMovies ()
         }
+    }
+
+    /**
+     * Go to previous page.
+     */
+    fun prevPage (): String {
+        var errorMsg = ""
+        if (page > PAGE_FIRST) {
+            // Update the page.
+            page--
+            savePage()
+
+            // Launch on main thread.
+            coroutineScope.launch(Dispatchers.Main) {
+                // Load new movies.
+                loadMovies ()
+            }
+        } else {
+            errorMsg = app.applicationContext.getString(R.string.atStart)
+        }
+
+        return errorMsg
+    }
+
+    /**
+     * Go to next page.
+     */
+    fun nextPage (): String {
+        var errorMsg = ""
+        if (page < movies.total_pages) {
+            // Update the page.
+            page++
+            savePage()
+
+            // Launch on main thread.
+            coroutineScope.launch(Dispatchers.Main) {
+                // Load new movies.
+                loadMovies ()
+            }
+        } else {
+            errorMsg = app.applicationContext.getString(R.string.atEnd)
+        }
+
+        return errorMsg
+    }
+
+    /**
+     * Save a shared pref.
+     */
+    fun saveSharedPref(key: String, value: Int)
+    {
+        val editor = sharedPrefs.edit()
+        editor.putInt(key, value)
+        editor.apply()
+    }
+
+    /**
+     * Save a shared pref.
+     */
+    fun saveSharedPref(key: String, value: String)
+    {
+        val editor = sharedPrefs.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
+
+    /**
+     * Save the current page value.
+     */
+    fun savePage ()
+    {
+        // Update the page.
+        saveSharedPref (PAGE, page)
     }
 }
 

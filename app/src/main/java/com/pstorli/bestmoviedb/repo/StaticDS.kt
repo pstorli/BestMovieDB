@@ -3,7 +3,7 @@ package com.pstorli.bestmoviedb.repo
 import android.content.Context
 import com.pstorli.bestmoviedb.Consts.ID_DEF
 import com.pstorli.bestmoviedb.Consts.NO_SIZE
-import com.pstorli.bestmoviedb.Consts.PAGE_DEF
+import com.pstorli.bestmoviedb.Consts.PAGE_FIRST
 import com.pstorli.bestmoviedb.model.Movie
 import com.pstorli.bestmoviedb.model.Movies
 import com.pstorli.bestmoviedb.model.Genres
@@ -24,8 +24,8 @@ object StaticDS : MovieDataSourceImpl()
 
     //  MY, MY
     val FAVORITES       : List<Movie> = listOf (MOVIE_2001, MOVIE_HUNT, MOVIE_YOUNG, MOVIE_FOG)
-    val MOVIES          = Movies (PAGE_DEF, FAVORITES.size, FAVORITES.size, FAVORITES)
-    val MOVIES_NONE     = Movies (PAGE_DEF, NO_SIZE, NO_SIZE, null)
+    val MOVIES          = Movies (PAGE_FIRST, FAVORITES.size, FAVORITES.size, FAVORITES)
+    val MOVIES_NONE     = Movies (PAGE_FIRST, NO_SIZE, NO_SIZE, null)
 
     val GENRES_NONE     = Genres ()
     val GENRES_SOME = listOf<Genre> (

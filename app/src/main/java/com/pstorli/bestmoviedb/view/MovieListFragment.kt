@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pstorli.bestmoviedb.R
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.movie_list.*
 
 class MovieListFragment : Fragment () {
@@ -38,8 +39,12 @@ class MovieListFragment : Fragment () {
 
         movieListRecyclerView?.layoutManager = lm
 
-        // Listen for the rider to change.
+        // Listen for the movie to change.
         movieViewModel.movie.observe(viewLifecycleOwner, { _ ->
+            // Update the page.
+            if (_this.requireActivity() is MainActivity) {
+                _this.requireActivity().mainToolbar.title = movieViewModel.page.toString()
+            }
             // Update when movie changes.
             movieListRecyclerView?.adapter = MovieAdapter(movieViewModel, _this)
         })

@@ -55,7 +55,7 @@ class RemoteDS : MovieDataSourceImpl()
             // /////////////////////////////////////////////////////////////////////////////////////
             // Create the api call.
             // /////////////////////////////////////////////////////////////////////////////////////
-            val callSync: Call<Movies> = movieService.getPopularMovies (TMDB_API_KEY)
+            val callSync: Call<Movies> = movieService.getPopularMovies (TMDB_API_KEY, page)
 
             // /////////////////////////////////////////////////////////////////////////////////////
             // !!! Block here and wait as the .execute call is being done synchrously.           !!!

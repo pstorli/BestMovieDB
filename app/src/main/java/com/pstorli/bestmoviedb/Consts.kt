@@ -33,9 +33,9 @@ object Consts {
     const val NO_SIZE               = 0
 
     const val PAGE                  = "page"
-    const val PAGE_DEF              = 1
+    const val PAGE_FIRST            = 1
     const val PAGE_FK               = "pageFk"
-    const val PAGE_FK_DEF           = PAGE_DEF
+    const val PAGE_FK_DEF           = PAGE_FIRST
     const val PREF_NAME             = "bmdb_prefs"
 
     const val PRIVATE_MODE          = 0
@@ -84,5 +84,7 @@ object Consts {
     {
         Log.w (TAG, msg)
     }
+
+
 
 }
