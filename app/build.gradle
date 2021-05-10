@@ -12,8 +12,8 @@ android {
         applicationId "com.pstorli.bestmoviedb"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1005
-        versionName "1005"
+        versionCode 1008
+        versionName "1008"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

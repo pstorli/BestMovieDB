@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pstorli.bestmoviedb.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,7 +14,6 @@ import kotlinx.android.synthetic.main.movie_list.*
 
 class MovieListFragment : Fragment () {
 
-    lateinit var movieViewModel: MovieViewModel
     lateinit var _this: MovieListFragment
 
     override fun onCreateView(
@@ -31,9 +31,7 @@ class MovieListFragment : Fragment () {
     }
 
     override fun onViewCreated (view: View, savedInstanceState: Bundle?) {
-        if (null!=activity) {
-            movieViewModel = ViewModelProvider (_this.requireActivity()).get (MovieViewModel::class.java)
-        }
+        var movieViewModel: MovieViewModel = ViewModelProvider (_this.requireActivity()).get (MovieViewModel::class.java)
 
         val lm = LinearLayoutManager(this.activity)
 

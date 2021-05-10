@@ -3,6 +3,7 @@ package com.pstorli.bestmoviedb.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.pstorli.bestmoviedb.R
@@ -37,8 +38,11 @@ class MovieViewHolder (inflater: LayoutInflater, val parent: ViewGroup, val movi
         // Listen for item click events.
         itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
+                // Get our view model.
+                var movieViewModel = ViewModelProvider (movieListFragment).get (MovieViewModel::class.java)
+
                 // Set this as the seletced movie.
-                movieListFragment.movieViewModel.movie.value = movie
+                movieViewModel.movie.value = movie
 
                 // Navigate to the detail fragment.
                 parent.findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment)

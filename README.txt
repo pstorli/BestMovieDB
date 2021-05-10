@@ -52,6 +52,17 @@ Very Impotent Stuff:
     tmdb_api_key ="{your moviedb api key here}"
     sdk.dir      ="{your android sdk dir here}"
 
+Resolved Issues Version 1008:
+  0000 Updated to get view model from viewmodelprovider.
+       var movieViewModel = ViewModelProvider (this).get (MovieViewModel::class.java)
+
+Resolved Issues Version 1007:
+  0000 Changed for 13 and up in store.
+
+
+Resolved Issues Version 1006:
+  0000 Removed code keywords from store listing.
+
 Resolved Issues Version 1005:
   0000 Added next/prev page buttons on toolbar.
   0000 Added snackbar to show messages.

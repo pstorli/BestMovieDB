@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.movie_detail.view.title
 
 class MovieDetailFragment : Fragment () {
 
-    lateinit var movieViewModel: MovieViewModel
-
     override fun onCreateView (
         inflater: LayoutInflater,
         parent: ViewGroup?,
@@ -27,9 +25,8 @@ class MovieDetailFragment : Fragment () {
         // Defines the xml file for the fragment
         val movieDetailView = inflater.inflate(R.layout.movie_detail, parent, false)
 
-        activity?.let {
-            movieViewModel = ViewModelProvider (it).get (MovieViewModel::class.java)
-        }
+        // Get our view model.
+        var movieViewModel = ViewModelProvider (this).get (MovieViewModel::class.java)
 
         // Update the details with the selected Movie
         // Was something selected?
